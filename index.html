@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutureDesks Clone - Turning Visions Into Digital Reality</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS RESET & VARIABLES */
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --green: #10b981;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-padding {
+            padding: 7rem 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            border: 1px solid var(--accent);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-secondary);
+        }
+
+        .badge {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--accent);
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 4rem;
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 2px;
+            background-color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            padding-top: 12rem;
+            padding-bottom: 6rem;
+            text-align: center;
+            background: radial-gradient(circle at top center, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .hero-audience {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .audience-avatars {
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-main);
+            margin-left: -12px;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .avatar:first-child { margin-left: 0; }
+        .avatar:nth-child(2) { background: #ec4899; }
+        .avatar:nth-child(3) { background: #10b981; }
+
+        .audience-info text {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: left;
+        }
+
+        .audience-info strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        /* MARQUEE RUNNING STRING */
+        .marquee-wrapper {
+            background: #111827;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 0;
+            overflow: hidden;
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 25s linear infinite;
+        }
+
+        .marquee-item {
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-right: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .marquee-item i {
+            color: var(--accent);
+            font-size: 0.75rem;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* FEATURES / PRICING SECTION */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .feature-card.premium {
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, rgba(11, 15, 25, 0) 100%);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .feature-card.premium .feature-icon {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-price {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .feature-price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* VIDEO SHOWCASE */
+        .video-section {
+            background: rgba(255, 255, 255, 0.01);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            aspect-ratio: 16/9;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* PORTFOLIO GRID */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        .portfolio-card {
+            group: inherit;
+            display: block;
+        }
+
+        .portfolio-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #1e293b;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-card:hover .portfolio-image {
+            transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .portfolio-card h4 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .portfolio-footer {
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* TESTIMONIALS */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .author-meta h5 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .author-meta p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* TEAM SHOWCASE */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .team-card {
+            text-align: center;
+        }
+
+        .team-avatar-box {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #1e293b;
+            border-radius: 16px;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .team-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ ACCORDION */
+        .faq-max {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 0.5rem 0;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            transition: max-height 0.5s cubic-bezier(1, 0, 1, 0);
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-color);
+            background-color: #070a10;
+            padding: 5rem 0 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            max-width: 320px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-links ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .subscribe-form input {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            flex-grow: 1;
+        }
+
+        .subscribe-form input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3.5rem; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2.25rem; }
+            .hero h1 { font-size: 2.75rem; }
+            .nav-links { display: none; }
+            .burger { display: flex; }
+            .features-grid, .portfolio-grid, .testimonials-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid { gap: 2.5rem; }
+            .hero-audience { flex-direction: column; gap: 1.5rem; align-items: center; }
+            .audience-info text { text-align: center; }
+            
+            /* Mobile Nav Class toggled via JS */
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-main);
+                padding: 2rem;
+                border-bottom: 1px solid var(--border-color);
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATION -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Future<span>Desks</span></a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#features">Prebuilt</a>
+                <a href="#features">Customized</a>
+                <a href="#portfolio">Our Work</a>
+                <a href="#team">Team</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <a href="#contact" class="btn btn-secondary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">Contact Us</a>
+            <div class="burger" id="burgerMenu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <span class="badge">Turning Visions Into Digital Reality</span>
+            <h1><span>Design. Build. Scale.</span><br>Your Technology Partner.</h1>
+            <p class="hero-desc">We deliver enterprise-grade prebuilt applications and highly scalable custom software tailored directly to your operational demands.</p>
+            <div class="hero-btns">
+                <a href="#portfolio" class="btn btn-primary">Let's Explore</a>
+                <a href="#contact" class="btn btn-secondary">Contact Us</a>
+            </div>
+            
+            <div class="hero-audience">
+                <div class="audience-avatars">
+                    <div class="avatar">RS</div>
+                    <div class="avatar">AS</div>
+                    <div class="avatar">KV</div>
+                </div>
+                <div class="audience-info">
+                    <text>Trusted by over <strong>130,000+ Founders</strong> globally.</text>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RUNNING STRING / MARQUEE -->
+    <div class="marquee-wrapper">
+        <div class="marquee-track">
+            <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Prebuilt Frameworks</div>
+            <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Custom SaaS Architecture</div>
+            <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Premium UX Production</div>
+            <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Native Mobile Deployments</div>
+            <!-- Duplicate for infinite track wrap -->
+            <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Prebuilt Frameworks</div>
+            <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Custom SaaS Architecture</div>
+            <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Premium UX Production</div>
+            <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Native Mobile Deployments</div>
+        </div>
+    </div>
+
+    <!-- FEATURES / OFFERS SECTION -->
+    <section id="features" class="container section-padding">
+        <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <span class="badge">Flexible Models</span>
+            <h2 class="section-title">Streamline Operations with Flexible Options</h2>
+            <p class="section-subtitle">Pick a model built entirely around your development deadlines and budget structure.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h3>Custom Software Architecture</h3>
+                <div class="feature-price">Bespoke <span>/ structured milestones</span></div>
+                <p>Engineered from scratch. Tailor every flow, integrate direct APIs, and build precise dashboards engineered perfectly for scale.</p>
+                <a href="#contact" class="btn btn-secondary" style="width: 100%;">Initiate Discovery</a>
+            </div>
+
+            <div class="feature-card premium">
+                <div class="feature-icon"><i class="fa-solid fa-cubes"></i></div>
+                <h3>SaaS Prebuilt System Deployment</h3>
+                <div class="feature-price">₹50,000 <span>one-time application cost</span></div>
+                <p>Skip foundational delay. Launch fully refined systems immediately, inclusive of intuitive UI states and pre-integrated backend modules.</p>
+                <a href="#contact" class="btn btn-primary" style="width: 100%;">Claim Immediate Deployment</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO EMBED SHOWCASE -->
+    <section class="video-section section-padding">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 class="section-title">Take A Visual Walkthrough</h2>
+                <p class="section-subtitle" style="margin-left: auto; margin-right: auto;">See how our engineering environment translates ideas into immediate production-grade reality.</p>
+            </div>
+            <div class="video-wrapper">
+                <!-- Standard YouTube placeholder embed config -->
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Product Walkthrough Showreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="container section-padding">
+        <div>
+            <span class="badge">Case Studies</span>
+            <h2 class="section-title">Turning Concepts Into Core Products</h2>
+            <p class="section-subtitle">Explore live environments we've shipped across modern e-commerce and enterprise tech verticals.</p>
+        </div>
+
+        <div class="portfolio-grid">
+            <a href="#" class="portfolio-card">
+                <div class="portfolio-image"><i class="fa-solid fa-bag-shopping fa-2xl"></i></div>
+                <h4>Lal Sweets Ecom Platform</h4>
+                <p>High-volume modern store architecture optimized for friction-free retail transitions.</p>
+            </a>
+            <a href="#" class="portfolio-card">
+                <div class="portfolio-image"><i class="fa-solid fa-gem fa-2xl"></i></div>
+                <h4>Kirtilals Luxury Showcase</h4>
+                <p>Premium immersive diamond-jewellery system focused on ultra-fluid micro-interactions.</p>
+            </a>
+            <a href="#" class="portfolio-card">
+                <div class="portfolio-image"><i class="fa-solid fa-chart-line fa-2xl"></i></div>
+                <h4>Tradescribe Analytics</h4>
+                <p>Sleek financial ledger tracking tools powered by intelligent structural reporting fields.</p>
+            </a>
+            <a href="#" class="portfolio-card">
+                <div class="portfolio-image"><i class="fa-solid fa-shirt fa-2xl"></i></div>
+                <h4>Murzban High-Fashion Store</h4>
+                <p>Next-gen design aesthetic curated for high-profile multi-device online clothing checkout.</p>
+            </a>
+        </div>
+
+        <div class="portfolio-footer">
+            <a href="#" class="btn btn-secondary">View All Productions</a>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="container section-padding">
+        <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <span class="badge">Testimonials</span>
+            <h2 class="section-title">Validated By Leading Operators</h2>
+            <p class="section-subtitle">Hear directly from the leadership teams managing systems built on our framework.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "The turnaround execution speed was exceptional. Shifting to their application design frameworks optimized our consumer conversions within weeks."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MN</div>
+                    <div class="author-meta">
+                        <h5>Muktesh Narula</h5>
+                        <p>Founder, Dovesoft Technologies</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "Eliminated basic architectural trial and error. Their system architectures allowed our product launch to scale perfectly on launch day."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SS</div>
+                    <div class="author-meta">
+                        <h5>Shriya Sadneni</h5>
+                        <p>Operations Director, Murzban Group</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SHOWCASE -->
+    <section id="team" class="container section-padding">
+        <div>
+            <span class="badge">The Architecture Team</span>
+            <h2 class="section-title">The Engineering Minds Behind</h2>
+            <p class="section-subtitle">Meet our structural designers and product engineers executing full-stack integrations daily.</p>
+        </div>
+
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar-box"><i class="fa-solid fa-user-tie"></i></div>
+                <h4>Tushar Rawat</h4>
+                <p>Founder & Architect</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar-box"><i class="fa-solid fa-user-tie"></i></div>
+                <h4>Aastha Negi</h4>
+                <p>Co-Founder / Strategy</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar-box"><i class="fa-solid fa-user-gear"></i></div>
+                <h4>Manish Das Sharma</h4>
+                <p>Chief Technical Officer</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar-box"><i class="fa-solid fa-code"></i></div>
+                <h4>Utkarsh Rajoriya</h4>
+                <p>Lead Systems Engineer</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="container section-padding">
+        <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <h2 class="section-title">Frequently Asked Inquiries</h2>
+            <p class="section-subtitle">Clear operational guidelines detailing how we integrate and deploy source pipelines.</p>
+        </div>
+
+        <div class="faq-max">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How long does it take to deliver a pre-built application or website?</span>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Prebuilt infrastructure assets deploy inside 3 to 7 business days, including basic configuration adjustments, domain mapping protocols, and verification stages.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Do you provide the complete source code after development?</span>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes. Upon project milestone resolution and final closeout, structural code ownership and repos transfer directly to your designated infrastructure team.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What technologies do you use for development?</span>
+                    <i class="fa-solid fa-chevron-down faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Our dynamic stacks leverage modern high-velocity technologies including Flutter for unified mobile ecosystems, alongside comprehensive React, Next.js, Node.js, and Tailwind CSS system layouts.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">Future<span>Desks</span></a>
+                <p>Building resilient, next-generation web ecosystems engineered to translate commercial actions into long-term customer pipelines.</p>
+                <p style="font-size: 0.9rem; color: var(--text-primary);">partnerships@futuredesks.in</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navigation Paths</h4>
+                <ul>
+                    <li><a href="#">Home Core</a></li>
+                    <li><a href="#features">Offer Matrices</a></li>
+                    <li><a href="#portfolio">Case Archives</a></li>
+                    <li><a href="#team">Team Roster</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Subscribe Updates</h4>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Receive product teardowns and system design case reviews directly.</p>
+                <form class="subscribe-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                    <input type="email" placeholder="Enter business email" required>
+                    <button type="submit" class="btn btn-primary" style="padding: 0 1rem;"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 FutureDesks Clone. All rights reserved.</p>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="#">Privacy Agreement</a>
+                <a href="#">Terms of Use</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTION LOGIC SCRIPT -->
+    <script>
+        // Responsive Mobile Menu Drawer Toggle
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        burgerMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Animate burger stripes into close state
+            const lines = burgerMenu.children;
+            lines[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(5px, 6px)' : 'none';
+            lines[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
+            lines[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(5px, -6px)' : 'none';
+        });
+
+        // Close mobile drawer when clicking a link path
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const lines = burgerMenu.children;
+                lines[0].style.transform = 'none';
+                lines[1].style.opacity = '1';
+                lines[2].style.transform = 'none';
+            });
+        });
+
+        // Smooth Accessible Accordion Functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close open elements sequentially
+                faqItems.forEach(el => el.classList.remove('active'));
+                
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
